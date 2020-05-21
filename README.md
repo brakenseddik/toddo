@@ -1,6 +1,10 @@
 # toddo
 
-A new Flutter application.
+A Simple Flutter application for state managment.
+A to do app so a user could add task , removee task  , update task
+![picture](https://github.com/brakenseddik/toddo/blob/master/assets/Screenshot_1590086886.png)
+![picture](https://github.com/brakenseddik/toddo/blob/master/assets/Screenshot_1590086899.png)
+
 
 ## Getting Started
 
