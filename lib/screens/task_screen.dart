@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:toddo/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:toddo/models/task_data.dart';
 import 'package:toddo/screens/add_task_screen.dart';
 import 'package:toddo/widgets/tasks_list.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'Task one'),
-    Task(name: 'Task two'),
-    Task(name: 'Task three')
-  ];
-  @override
+class TaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -23,12 +13,7 @@ class _TaskScreenState extends State<TaskScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (BuildContext context) => AddTaskScreen((newtitle) {
-              setState(() {
-                tasks.add(Task(name: newtitle));
-                Navigator.pop(context);
-              });
-            }),
+            builder: (BuildContext context) => AddTaskScreen(),
           );
         },
       ),
@@ -60,7 +45,7 @@ class _TaskScreenState extends State<TaskScreen> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${tasks.length} tasks',
+                  '${Provider.of<TaskData>(context).taskCount} tasks',
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ],
@@ -69,9 +54,7 @@ class _TaskScreenState extends State<TaskScreen> {
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
-              child: taskList(
-                tasks: tasks,
-              ),
+              child: taskList(),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
